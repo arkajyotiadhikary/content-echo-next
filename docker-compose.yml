@@ -1,0 +1,19 @@
+# docker-compose.yml
+version: '3'
+
+services:
+  nextjs:
+    image: 533266978173.dkr.ecr.ap-south-1.amazonaws.com/strapi-next:latest
+    container_name: nextjs
+    ports:
+      - "3000:3000"
+
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
+    container_name: nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - nextjs
